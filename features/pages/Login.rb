@@ -2,7 +2,7 @@ require_relative '../../features/pages/base'
 # Login page class
 class LoginPage < BasePage
   attr_accessor :email, :password, :loginButton, :skipButton, :homeButton, :friendsTab, :friendTag, :voiceCallButton
-  attr_accessor :chatMessageInput, :leaveCallButton, :userSettings, :logOutButton
+  attr_accessor :chatMessageInput, :leaveCallButton, :userSettings, :logOutButton, :logOutConfirm
 
   def initialize
     @email = Element.new(:xpath, "//input[@type='email']")
@@ -13,7 +13,9 @@ class LoginPage < BasePage
 
     @skipButton = Element.new(:xpath, "//*[text()='Skip']")
 
-  
+    @logOutButton = Element.new(:xpath,"//div[text()='Log Out']")
+
+    @logOutConfirm = Element.new(:xpath,"//button/div[text()='Log Out']")
   end
 
   def fill_form(user)
@@ -27,5 +29,9 @@ class LoginPage < BasePage
 
   def load_home_page
     visit ''
+    @email.visible?
+    @password.visible?
+    @loginButton.visible?
   end
+
 end
